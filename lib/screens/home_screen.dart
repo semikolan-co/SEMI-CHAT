@@ -1,6 +1,8 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:semi_chat/constants/colors.dart';
+import 'package:semi_chat/pages/chat_page.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,49 +15,57 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  // =
+  // TabController(length: 4, vsync: this, initialIndex: 0);
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: 4, vsync: this, initialIndex: 1);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('semi-chat'),
+        backgroundColor: MyColors.primaryColor,
+        title: const Text('SEMI-CHAT'),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
             tooltip: 'search',
             onPressed: () {},
           ),
-          PopupMenuButton<String>(itemBuilder: (BuildContext ctx) {
-            return [
-              PopupMenuItem(
-                child: Text(
-                  'New Group',
-                  style: const TextStyle(fontSize: 20),
+          PopupMenuButton<int>(
+            onSelected: (val) {
+              print(val);
+            },
+            itemBuilder: (BuildContext ctx) {
+              return [
+                PopupMenuItem(
+                  child: Text(
+                    'New Group',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  value: 1,
                 ),
-                value: 'newgroup',
-              ),
-              PopupMenuItem(
-                child: Text(
-                  'New Broadcast',
-                  style: const TextStyle(fontSize: 20),
+                PopupMenuItem(
+                  child: Text(
+                    'New Broadcast',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  value: 2,
                 ),
-                value: 'broadcast',
-              ),
-              PopupMenuItem(
-                child: Text(
-                  'Settings',
-                  style: const TextStyle(fontSize: 20),
+                PopupMenuItem(
+                  child: Text(
+                    'Settings',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  value: 3,
                 ),
-                value: 'settings',
-              ),
-            ];
-          })
+              ];
+            },
+          ),
         ],
         bottom: TabBar(tabs: const [
           Tab(
@@ -73,11 +83,24 @@ class _HomeScreenState extends State<HomeScreen>
         ], controller: _tabController),
       ),
       body: TabBarView(
-        children: [],
+        controller: _tabController,
+        children: [
+          Text(
+            'lorem',
+            style: const TextStyle(fontSize: 20),
+          ),
+          ChatPage(),
+          Text(
+            'lorem',
+            style: const TextStyle(fontSize: 20),
+          ),
+          Text(
+            'lorem',
+            style: const TextStyle(fontSize: 20),
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-      ),
+       
     );
   }
 }

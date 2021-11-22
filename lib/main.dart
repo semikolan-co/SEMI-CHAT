@@ -3,7 +3,8 @@
 //import '../widget/detailscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:semi_chat/constants/colors.dart';
+import 'constants/colors.dart';
+import 'pages/chat_page.dart';
 import 'screens/home_screen.dart';
 
 void main() {
@@ -22,12 +23,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'homepage',
       theme: ThemeData(
+        // fontFamily: "ComforterBrush",
         primaryColor: MyColors.primaryColor,
       ),
       debugShowCheckedModeBanner: false,
       home: const HomeScreen(),
       routes: {
         HomeScreen.routeName: (ctx) => const HomeScreen(),
+        ChatPage.routeName: (ctx) => const ChatPage(),
       },
     );
   }
