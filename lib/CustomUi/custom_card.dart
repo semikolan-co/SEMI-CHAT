@@ -1,29 +1,60 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+
+import 'package:semi_chat/Model/chat_model.dart';
 import 'package:semi_chat/constants/colors.dart';
+import 'package:semi_chat/pages/individuals_page.dart';
 
 class CustomCard extends StatelessWidget {
-  const CustomCard({Key? key}) : super(key: key);
+  // const CustomCard({Key? key}) : super(key: key);
+  // String name;
+  // String icon;
+  // String time;
+  // String message;
+  // bool isGroup;
+  // CustomCard({
+  //   Key? key,
+  //   required this.name,
+  //   required this.icon,
+  //   required this.time,
+  //   required this.message,
+  //   required this.isGroup,
+  // }) : super(key: key);
+  ChatModel chatModel;
+  CustomCard({
+    Key? key,
+    required this.chatModel,
+  }) : super(key: key);
 
+  // CustomCard({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
       splashColor: MyColors.primaryColor,
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => IndividualPage(
+                      chatModel: chatModel,
+                    ))
+            // arguments: product.id
+            );
+      },
       child: Card(
         elevation: 3,
         child: ListTile(
           leading: CircleAvatar(
             radius: 25,
             child: Icon(
-              Icons.person,
+              chatModel.isGroup ? Icons.people : Icons.person,
               color: Colors.white,
             ),
             backgroundColor: MyColors.primaryColor,
           ),
           title: Text(
-            'semikolan',
+            chatModel.name,
             textScaleFactor: 1.5,
           ),
           subtitle: Row(
@@ -33,12 +64,12 @@ class CustomCard extends StatelessWidget {
                 width: 3,
               ),
               Text(
-                'hii semikolan',
+                chatModel.currentMessage,
                 style: const TextStyle(fontSize: 15),
               ),
             ],
           ),
-          trailing: Text('18:04'),
+          trailing: Text(chatModel.time),
           // selected: true,
         ),
       ),
