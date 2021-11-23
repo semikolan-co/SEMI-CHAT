@@ -1,14 +1,23 @@
 // ignore_for_file: unused_field, must_be_immutable, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:emoji_picker/emoji_picker.dart';
+// import 'package:emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:semi_chat/CustomUi/own_message_card.dart';
+import 'package:semi_chat/CustomUi/reply_card.dart';
 
 import 'package:semi_chat/Model/chat_model.dart';
 import 'package:semi_chat/constants/colors.dart';
 
-class IndividualPage extends StatelessWidget {
+class IndividualPage extends StatefulWidget {
   IndividualPage({Key? key, required this.chatModel}) : super(key: key);
   ChatModel chatModel;
+
+  @override
+  State<IndividualPage> createState() => _IndividualPageState();
+}
+
+class _IndividualPageState extends State<IndividualPage> {
+  bool showEmoji = false;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +47,7 @@ class IndividualPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              chatModel.name,
+              widget.chatModel.name,
               style: const TextStyle(fontSize: 20),
             ),
             Text(
@@ -97,62 +106,76 @@ class IndividualPage extends StatelessWidget {
         child: Stack(
           children: [
             ListView(
-              children: [],
+              children: [
+                OwnMessageCard(),
+                ReplyMessageCard(),
+                OwnMessageCard(),
+                ReplyMessageCard(),
+                OwnMessageCard(),
+                ReplyMessageCard(),
+                OwnMessageCard(),
+                ReplyMessageCard(),
+                OwnMessageCard(),
+                ReplyMessageCard(),
+                OwnMessageCard(),
+                ReplyMessageCard(),
+              ],
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(30)),
-                            width: MediaQuery.of(context).size.width - 70,
-                            child: TextFormField(
-                              maxLines: 5,
-                              minLines: 1,
-                              decoration: InputDecoration(
-                                  suffixIcon: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.attach_file,
-                                          color: MyColors.primaryColor,
-                                          size: 20,
-                                        ),
-                                      ),
-                                      IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.camera_alt,
-                                          color: MyColors.primaryColor,
-                                          size: 20,
-                                        ),
-                                      ),
-                                    ],
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(30)),
+                        width: MediaQuery.of(context).size.width - 70,
+                        child: TextFormField(
+                          maxLines: 5,
+                          minLines: 1,
+                          decoration: InputDecoration(
+                              suffixIcon: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.attach_file,
+                                      color: MyColors.primaryColor,
+                                      size: 20,
+                                    ),
                                   ),
-                                  border: InputBorder.none,
-                                  prefixIcon: Icon(
-                                    Icons.emoji_emotions,
-                                    color: MyColors.primaryColor,
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.camera_alt,
+                                      color: MyColors.primaryColor,
+                                      size: 20,
+                                    ),
                                   ),
-                                  hintText: 'Type a message'),
-                            )),
-                      ),
-                      CircleAvatar(
-                        backgroundColor: MyColors.primaryColor,
-                        child: const Icon(Icons.send),
-                      ),
-                    ],
+                                ],
+                              ),
+                              border: InputBorder.none,
+                              prefixIcon: InkWell(
+                                onTap: () {
+                                  showEmoji = !showEmoji;
+                                },
+                                child: Icon(
+                                  Icons.emoji_emotions,
+                                  color: MyColors.primaryColor,
+                                ),
+                              ),
+                              hintText: 'Type a message'),
+                        )),
                   ),
-                  emojipicker(),
+                  CircleAvatar(
+                    backgroundColor: MyColors.primaryColor,
+                    child: const Icon(Icons.send),
+                  ),
                 ],
               ),
             ),
@@ -163,12 +186,16 @@ class IndividualPage extends StatelessWidget {
     );
   }
 
-  Widget emojipicker() {
-    return EmojiPicker(
-        rows: 4,
-        columns: 7,
-        onEmojiSelected: (emoji, category) {
-          print(emoji);
-        });
-  }
+  // Widget emojiSelect() {
+  //   return EmojiPicker(
+  //     rows: 3,
+  //     columns: 7,
+  //     buttonMode: ButtonMode.MATERIAL,
+  //     recommendKeywords: ["racing", "horse"],
+  //     numRecommended: 10,
+  //     onEmojiSelected: (emoji, category) {
+  //       print(emoji);
+  //     },
+  //   );
+  // }
 }
