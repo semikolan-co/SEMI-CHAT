@@ -43,7 +43,10 @@ class CustomCard extends StatelessWidget {
             );
       },
       child: Card(
-        elevation: 3,
+        elevation: 2,
+        shape:RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0)
+        ),
         child: ListTile(
           leading: CircleAvatar(
             radius: 25,
