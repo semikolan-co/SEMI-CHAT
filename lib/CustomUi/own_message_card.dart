@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:semi_chat/constants/colors.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class OwnMessageCard extends StatelessWidget {
   const OwnMessageCard({Key? key}) : super(key: key);
@@ -9,6 +11,7 @@ class OwnMessageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dismissible(
+
       key: ValueKey(0),
       child: Align(
         alignment: Alignment.centerRight,
@@ -48,6 +51,19 @@ class OwnMessageCard extends StatelessWidget {
           ),
         ),
       ),
+      onDismissed: (dir){
+        toaster("Dismissed");
+      },
     );
   }
+}
+
+toaster(String msg){
+  Fluttertoast.showToast(msg: msg,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      textColor: Colors.white,
+      backgroundColor: Colors.teal);
+
 }

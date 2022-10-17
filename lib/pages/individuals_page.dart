@@ -105,78 +105,84 @@ class _IndividualPageState extends State<IndividualPage> {
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
-            ListView(
-              children: [
-                OwnMessageCard(),
-                ReplyMessageCard(),
-                OwnMessageCard(),
-                ReplyMessageCard(),
-                OwnMessageCard(),
-                ReplyMessageCard(),
-                OwnMessageCard(),
-                ReplyMessageCard(),
-                OwnMessageCard(),
-                ReplyMessageCard(),
-                OwnMessageCard(),
-                ReplyMessageCard(),
-              ],
+            Padding(
+              padding: EdgeInsets.only(bottom:MediaQuery.of(context).size.height * 0.08),
+              child: ListView(
+                children: [
+                  OwnMessageCard(),
+                  ReplyMessageCard(),
+                  OwnMessageCard(),
+                  ReplyMessageCard(),
+                  OwnMessageCard(),
+                  ReplyMessageCard(),
+                  OwnMessageCard(),
+                  ReplyMessageCard(),
+                  OwnMessageCard(),
+                  ReplyMessageCard(),
+                  OwnMessageCard(),
+                  ReplyMessageCard(),
+                ],
+              ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(30)),
-                        width: MediaQuery.of(context).size.width - 70,
-                        child: TextFormField(
-                          maxLines: 5,
-                          minLines: 1,
-                          decoration: InputDecoration(
-                              suffixIcon: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.attach_file,
-                                      color: MyColors.primaryColor,
-                                      size: 20,
+              child: Container(
+                color: MyColors.transparent,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(30)),
+                          width: MediaQuery.of(context).size.width - 70,
+                          child: TextFormField(
+                            maxLines: 5,
+                            minLines: 1,
+                            decoration: InputDecoration(
+                                suffixIcon: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.attach_file,
+                                        color: MyColors.primaryColor,
+                                        size: 20,
+                                      ),
                                     ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.camera_alt,
-                                      color: MyColors.primaryColor,
-                                      size: 20,
+                                    IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.camera_alt,
+                                        color: MyColors.primaryColor,
+                                        size: 20,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              border: InputBorder.none,
-                              prefixIcon: InkWell(
-                                onTap: () {
-                                  showEmoji = !showEmoji;
-                                },
-                                child: Icon(
-                                  Icons.emoji_emotions,
-                                  color: MyColors.primaryColor,
+                                  ],
                                 ),
-                              ),
-                              hintText: 'Type a message'),
-                        )),
-                  ),
-                  CircleAvatar(
-                    backgroundColor: MyColors.primaryColor,
-                    child: const Icon(Icons.send),
-                  ),
-                ],
+                                border: InputBorder.none,
+                                prefixIcon: InkWell(
+                                  onTap: () {
+                                    showEmoji = !showEmoji;
+                                  },
+                                  child: Icon(
+                                    Icons.emoji_emotions,
+                                    color: MyColors.primaryColor,
+                                  ),
+                                ),
+                                hintText: 'Type a message'),
+                          )),
+                    ),
+                    CircleAvatar(
+                      backgroundColor: MyColors.primaryColor,
+                      child: const Icon(Icons.send),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
